@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    @@include("./partials/title-meta.html", {"title": "Starter Page"}) @@include('./partials/head-css.html')
+
+</head>
+
+<body class="loading" data-layout="topnav" data-layout-config='{"layoutBoxed":false,"darkMode":false,"showRightSidebarOnStart": true}'>
+    <!-- Begin page -->
+    <div class="wrapper">
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="content-page">
+            <div class="content">
+                @@include('./partials/horizontal-nav.html')
+
+                <!-- Start Content-->
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Pages</a></li>
+                                        <li class="breadcrumb-item active">Consulta-360</li>
+                                    </ol>
+                                </div>
+                                <h4 class="page-title">Consulta360</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                </div>
+                <!-- container -->
+                <div class="container-fluid">
+                    <div class="content-page">
+                        <div class="content">
+
+
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <form id="consultForm">
+                                        <div class="row g-2">
+                                            <div class="mb-3 col-md-4">
+                                                <input id="tipSol" value="CO" hidden></input>
+                                                <div class="custom-select">
+                                                    <select id="selectId" class="form-select">
+                                                    <option value="">---Seleccione un metodo de busueda.---</option>
+                                                    <option value="10">Nombre</option>
+                                                    <option value="08">Tarjeta</option>
+                                                    <option value="07">Cedula</option>
+                                                </select>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <input required type="text" class="form-control" id="identId" placeholder="CIF" autocomplete="off">
+                                                <button type="submit" class="btn btn-warning rounded-pill">Buscar <i class="dripicons-search"></i></button>
+                                            </div>
+                                            <button type="submit" class="btn btn-warning rounded-pill">Buscar <i class="dripicons-search"></i></button>
+                                        </div>
+                                    </form>
+
+
+                                </div>
+                            </div>
+                            <div id="loading"></div>
+                            <style>
+                                /* The container must be positioned relative: */
+                                
+                                .custom-select {
+                                    position: relative;
+                                    font-family: Arial;
+                                }
+                                
+                                .custom-select select {
+                                    display: none;
+                                    /*hide original SELECT element: */
+                                }
+                                
+                                .select-selected {
+                                    background-color: DodgerBlue;
+                                }
+                                /* Style the arrow inside the select element: */
+                                
+                                .select-selected:after {
+                                    position: absolute;
+                                    content: "";
+                                    top: 14px;
+                                    right: 10px;
+                                    width: 0;
+                                    height: 0;
+                                    border: 6px solid transparent;
+                                    border-color: #fff transparent transparent transparent;
+                                }
+                                /* Point the arrow upwards when the select box is open (active): */
+                                
+                                .select-selected.select-arrow-active:after {
+                                    border-color: transparent transparent #fff transparent;
+                                    top: 7px;
+                                }
+                                /* style the items (options), including the selected item: */
+                                
+                                .select-items div,
+                                .select-selected {
+                                    color: #ffffff;
+                                    padding: 8px 16px;
+                                    border: 1px solid transparent;
+                                    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+                                    cursor: pointer;
+                                }
+                                /* Style items (options): */
+                                
+                                .select-items {
+                                    position: absolute;
+                                    background-color: DodgerBlue;
+                                    top: 100%;
+                                    left: 0;
+                                    right: 0;
+                                    z-index: 99;
+                                }
+                                /* Hide the items when the select box is closed: */
+                                
+                                .select-hide {
+                                    display: none;
+                                }
+                                
+                                .select-items div:hover,
+                                .same-as-selected {
+                                    background-color: rgba(0, 0, 0, 0.1);
+                                }
+                                
+                                #loading {
+                                    width: 2rem;
+                                    height: 2rem;
+                                    border: 5px solid #f3f3f3;
+                                    border-top: 6px solid #9c41f2;
+                                    border-radius: 100%;
+                                    margin: auto;
+                                    visibility: hidden;
+                                    animation: spin 1s infinite linear;
+                                }
+                                
+                                #loading.display {
+                                    visibility: visible;
+                                }
+                                
+                                @keyframes spin {
+                                    from {
+                                        transform: rotate(0deg);
+                                    }
+                                    to {
+                                        transform: rotate(360deg);
+                                    }
+                                }
+                            </style>
+
+
+                            <div id="RESPONSE"></div>
+
+                            <div id="RESPONSE1"></div>
+                            <div id="RESPONSE3"></div>
+
+                            <div id="RESPONSE4"></div>
+                            <div id="RESPONSE5"></div>
+                            <div id="RESPONSE2"></div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- content -->
+
+            @@include('./partials/footer.html')
+
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+
+    </div>
+    <!-- END wrapper -->
+
+    @@include('./partials/right-sidebar.html')
+
+    <!-- bundle -->
+    <script>
+        var x, i, j, l, ll, selElmnt, a, b, c;
+        /* Look for any elements with the class "custom-select": */
+        x = document.getElementsByClassName("custom-select");
+        l = x.length;
+        for (i = 0; i < l; i++) {
+            selElmnt = x[i].getElementsByTagName("select")[0];
+            ll = selElmnt.length;
+            /* For each element, create a new DIV that will act as the selected item: */
+            a = document.createElement("DIV");
+            a.setAttribute("class", "select-selected");
+            a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+            x[i].appendChild(a);
+            /* For each element, create a new DIV that will contain the option list: */
+            b = document.createElement("DIV");
+            b.setAttribute("class", "select-items select-hide");
+            for (j = 1; j < ll; j++) {
+                /* For each option in the original select element,
+                create a new DIV that will act as an option item: */
+                c = document.createElement("DIV");
+                c.innerHTML = selElmnt.options[j].innerHTML;
+                c.addEventListener("click", function(e) {
+                    /* When an item is clicked, update the original select box,
+                    and the selected item: */
+                    var y, i, k, s, h, sl, yl;
+                    s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+                    sl = s.length;
+                    h = this.parentNode.previousSibling;
+                    for (i = 0; i < sl; i++) {
+                        if (s.options[i].innerHTML == this.innerHTML) {
+                            s.selectedIndex = i;
+                            h.innerHTML = this.innerHTML;
+                            y = this.parentNode.getElementsByClassName("same-as-selected");
+                            yl = y.length;
+                            for (k = 0; k < yl; k++) {
+                                y[k].removeAttribute("class");
+                            }
+                            this.setAttribute("class", "same-as-selected");
+                            break;
+                        }
+                    }
+                    h.click();
+                });
+                b.appendChild(c);
+            }
+            x[i].appendChild(b);
+            a.addEventListener("click", function(e) {
+                /* When the select box is clicked, close any other select boxes,
+                and open/close the current select box: */
+                e.stopPropagation();
+                closeAllSelect(this);
+                this.nextSibling.classList.toggle("select-hide");
+                this.classList.toggle("select-arrow-active");
+            });
+        }
+
+        function closeAllSelect(elmnt) {
+            /* A function that will close all select boxes in the document,
+            except the current select box: */
+            var x, y, i, xl, yl, arrNo = [];
+            x = document.getElementsByClassName("select-items");
+            y = document.getElementsByClassName("select-selected");
+            xl = x.length;
+            yl = y.length;
+            for (i = 0; i < yl; i++) {
+                if (elmnt == y[i]) {
+                    arrNo.push(i)
+                } else {
+                    y[i].classList.remove("select-arrow-active");
+                }
+            }
+            for (i = 0; i < xl; i++) {
+                if (arrNo.indexOf(i)) {
+                    x[i].classList.add("select-hide");
+                }
+            }
+        }
+
+        /* If the user clicks anywhere outside the select box,
+        then close all select boxes: */
+        document.addEventListener("click", closeAllSelect);
+    </script>
+
+
+    <script src="assets/js/pages/cons360.js"></script>
+    <script src="assets/js/app.log.js"></script>
+
+    <script src="assets/js/vendor.min.js"></script>
+    <script src="assets/js/app.min.js"></script>
+
+
+
+</body>
+
+</html>
