@@ -40,7 +40,12 @@ Dcl-PR  GetEnv       pointer   ExtProc('getenv');
  *N     pointer   value Options(*string);
 End-Pr;
 
+<<<<<<< HEAD
 
+=======
+ 
+ 
+>>>>>>> 0b14c6765e081fe0f97180e23d4fc36e1679d3f0
 //-----------ALL DATA STRUCTURES------------------
 Dcl-Ds     ErrDs       QUALIFIED;
  byteProv  Int(10)inz(0);
@@ -93,15 +98,25 @@ DCL-S STRING   CHAR(1677310);
         STRING= %trim(rtnBuffer);
         Translate(%len(%trim(STRING)): STRING: 'QTCPEBC');
 
+<<<<<<< HEAD
 
 
 //    IF par = 'CO' or par ='VT' OR PAR = 'TS' or PAR = 'SW' or par='SV' or par = 'TR';
   //si la variable PAR es igual a "CO" LLAMAR A PROGRAMA PARA CONSULTAS (CONSUW001)
+=======
+  //IF par = 'CO' or par ='VT' OR PAR = 'TS' or PAR = 'SW' or par='SV' or par = 'TR';
+  //si la variable PAR es igual a "CO" LLAMAR A PROGRAMA PARA CONSULTAS (CONSUW001)
+
+>>>>>>> 0b14c6765e081fe0f97180e23d4fc36e1679d3f0
 CLEAR RESPONSE;
         CALLP CONSUW001(STRING:PAR:RESPONSE);
       WriteToWeb(response: %len(%trim(response)): ErrDs);
 //    endif;
         *INLR=*ON;
+<<<<<<< HEAD
         return;
 
 
+=======
+        return;
+>>>>>>> 0b14c6765e081fe0f97180e23d4fc36e1679d3f0
