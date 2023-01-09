@@ -84,6 +84,7 @@
     "select2": "^4.0.13",
     "simplebar": "^5.2.1",
     "simplemde": "^1.11.2",
+    "touch": "^3.1.0",
     "twitter-bootstrap-wizard": "^1.2.0",
     "typeahead.js": "^0.11.1"
   }

@@ -6,8 +6,8 @@ var args = require('yargs').argv;
  * ---------------------------------------------------------------------------------------------
 */
 
-const DEFAULT_DEMO = 'saas';
-const AVAILABLE_DEMOS = ['saas','modern','creative'];
+const DEFAULT_DEMO = 'creative';
+const AVAILABLE_DEMOS = ['creative'];
 
 var FOLDER_PATHS = {
     baseSrc: "src/", // source files
