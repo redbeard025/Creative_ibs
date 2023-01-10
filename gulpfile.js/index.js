@@ -28,7 +28,7 @@ function initBrowserSync(done) {
         server: {
             baseDir: distPath,
             middleware: [
-                function (req, res, next) {
+                function(req, res, next) {
                     req.method = 'GET';
                     next();
                 }
@@ -65,14 +65,14 @@ function watchFiles() {
 gulp.task("watch", gulp.parallel(watchFiles, initBrowserSync));
 
 // default
-gulp.task('default', gulp.series('copyAssets', 'copyHtml', 'copyImages', 'copyFonts', 'compileSaas', 'compileJs', 'watch'), function (done) { done(); });
+gulp.task('default', gulp.series('copyAssets', 'copyHtml', 'copyImages', 'copyFonts', 'compileSaas', 'compileJs', 'watch'), function(done) { done(); });
 
 
 // build
 gulp.task("build", gulp.series('copyAssets', 'copyHtml', 'copyImages', 'copyFonts', 'compileSaas', 'compileJs'));
 
 // doc
-gulp.task("docs", function () {
+gulp.task("docs", function() {
     browsersync.init({
         server: {
             baseDir: "docs"
