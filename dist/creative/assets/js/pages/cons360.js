@@ -1,5 +1,6 @@
 //Consult function
 document.documentElement.classList.remove('no-js');
+navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 
 var consultFunction = function(event) {
     event.preventDefault();
@@ -252,3 +253,13 @@ function tcSaldovenc() {
     });
 
 };
+
+function successCallback(position) {
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+    console.log("Latitude: " + latitude + ", Longitude: " + longitude);
+}
+
+function errorCallback(error) {
+    console.log(error);
+}
